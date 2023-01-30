@@ -1,18 +1,17 @@
 import React from 'react';
-import { Button, Typography } from '@mui/material';
+import { Button } from '@mui/material';
 import TextField from '@mui/material/TextField';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import GoogleIcon from '@mui/icons-material/Google';
 import { Link} from '@mui/material';
 import { Grid } from '@mui/material';
-export default function LoginForm() {
+export default function RegistrationForm() {
   return (
   <div>
               <div className="p-6 rounded-lg shadow-lg  bg-green-300 max-w-sm">
 
- <Typography variant="h6">
-              Category: Fruit
-            </Typography>
+                <div className='text-center  '>
+<p className='font-size-10px'>Sign Up</p>
 
                 </div>
     <form>
@@ -54,15 +53,15 @@ export default function LoginForm() {
           placeholder="Password"/>
       </div>
       <div className="flex justify-between items-center mb-6">
-        <div className="form-group form-check">
+        {/* <div className="form-group form-check">
           <input type="checkbox"
             className="form-check-input appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
             id="exampleCheck2"/>
           <label className="form-check-label inline-block text-gray-800" htmlFor="exampleCheck2">Remember me</label>
-        </div>
-        <a href="#!"
+        </div> */}
+        {/* <a href="#!"
           className="text-blue-600 hover:text-blue-700 focus:text-blue-700 transition duration-200 ease-in-out">Forgot
-          password?</a>
+          password?</a> */}
       </div>
       <button type="submit" className="
         w-full
@@ -81,7 +80,7 @@ export default function LoginForm() {
         active:bg-blue-800 active:shadow-lg
         transition
         duration-150
-        ease-in-out">Sign in</button>
+        ease-in-out">Sign Up</button>
 
         <div>
 <div className='flex pt-2'>
@@ -110,12 +109,12 @@ export default function LoginForm() {
         <Link href="#" underline="none">
      
     </Link>
-      <p className="text-gray-800 mt-6 text-center">Not a member? <a href="#!"
-          className="text-blue-600 hover:text-blue-700 focus:text-blue-700 transition duration-200 ease-in-out">Register</a>
+      <p className="text-gray-800 mt-6 text-center">Already have an account? <a href="#!"
+          className="text-blue-600 hover:text-blue-700 focus:text-blue-700 transition duration-200 ease-in-out">Log In</a>
       </p>
       
     </form>
   </div>
-
+  </div>
   );
 }
