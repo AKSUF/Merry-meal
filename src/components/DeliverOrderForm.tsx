@@ -66,7 +66,7 @@ onChange={(e) => setDeliveryAddress(e.target.value)}
                                  transition
                                  duration-150
                                  ease-in-out">
-Submit
+                                    Order
 </button>
 </div>
 </form>
