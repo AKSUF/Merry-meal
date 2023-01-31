@@ -7,7 +7,10 @@ export default function RegistrationPage() {
     return (
         <div>
             <Navbar/>
-            <Grid container spacing={2}>
+            <div style={{backgroundImage:"url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSUvOKON-ZrJiOJYw9zj74xSLTMMEijZPnhCg&usqp=CAU')",  backgroundSize: 'cover',
+      backgroundPosition: 'center',
+      height: '100vh' }}  className='hello'>  
+         <Grid container spacing={2}>
       <Grid item xs={12} sm={6} md={4}>
         <div></div>
       </Grid>
@@ -19,6 +22,7 @@ export default function RegistrationPage() {
       </Grid>
     </Grid>
 
+         </div>
         </div>
     )
 }

@@ -5,11 +5,11 @@ import myImage from '../assest/IMG_20220217_112305_2.jpg'
 export default function Profile() {
     return (
      <div>
-       <div className="pl-20 pt-8">
+       <div className=" pt-8 bg-sky-200">
     
-    <div className=" w-full lg:max-w-full lg:flex  ">
+    <div className=" w-full lg:max-w-full lg:flex bg-sky-200 ">
    
-     <div className="border border-gray-400 lg:border-l-0 lg:border lg:border-gray-400 bg-white rounded-b lg:rounded-b-none lg:rounded p-4 flex  justify-between leading-normal w-full mr-20 ml-20 lg:w-">
+     <div className=" p-4 flex  justify-between leading-normal w-full lg:w-">
        <div className="mb-4">
          <p className="text-gray-900  text-xl mb-2">
     Name:<span className='p-2'>Abu Sfian</span>
@@ -44,7 +44,7 @@ export default function Profile() {
    
   
    </div>
-   <div className="p-4 mr-12 ml-12">
+   <div className="p-4">
   <h3 className="text-green-900-300 mb-4 text-center border-gray-700 font-bold">
  About Me
   </h3>

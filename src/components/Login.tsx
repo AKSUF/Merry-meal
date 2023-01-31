@@ -1,45 +1,82 @@
-import React from 'react';
+
 import { Button, Typography } from '@mui/material';
 import TextField from '@mui/material/TextField';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import GoogleIcon from '@mui/icons-material/Google';
 import { Link} from '@mui/material';
-import { Grid } from '@mui/material';
-export default function LoginForm() {
+import React, { useState } from 'react';
+
+
+interface FormData {
+  name: string;
+  email: string;
+  password: string;
+}
+
+const initialFormData: FormData = {
+  name: '',
+  email: '',
+  password: '',
+};
+
+const LoginForm: React.FC = () => {
+  const [formData, setFormData] = useState<FormData>(initialFormData);
+  const [formErrors, setFormErrors] = useState<Partial<FormData>>({});
+  const [submitting, setSubmitting] = useState<boolean>(false);
+
+  const validate = (): boolean => {
+    const errors: Partial<FormData> = {};
+    if (!formData.name) {
+      errors.name = 'Name is required';
+    }
+    if (!formData.email) {
+      errors.email = 'Email is required';
+    }
+    if (!formData.password) {
+      errors.password = 'Password is required';
+    }
+    setFormErrors(errors);
+    return Object.keys(errors).length === 0;
+  };
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setSubmitting(true);
+    if (validate()) {
+      console.log('Form is valid, send data to the server');
+      // Do something with the form data here
+    }
+    setSubmitting(false);
+  };
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
   return (
-  <div>
-              <div className="p-6 rounded-lg shadow-lg  bg-green-300 max-w-sm">
+    <div className='shadow bg-white'>
+    <div className=" rounded-lg w-full">
 
- <Typography variant="h6">
-              Category: Fruit
-            </Typography>
+<Typography variant="h6" className='text-center'>
+  Sign In
+  </Typography>
 
-                </div>
-    <form>
-      <div className="form-group mb-2">
-        <label htmlFor="exampleInputEmail2" className="form-label inline-block mb-2 text-gray-700">Email address</label>
-        <input type="email" className="form-control
-          block
-          w-full
+  <form onSubmit={handleSubmit}>
+      <div className="form-group mb-1 pl-10">
+        <label htmlFor="name">Name:</label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          value={formData.name}
+          onChange={handleChange} className="form-control block
+          w-10/12
           px-3
-          py-1.5
-          text-base
-          font-normal
-          text-gray-700
-          bg-green-100 bg-clip-padding
-          border border-solid border-gray-300
-          rounded
-          transition
-          ease-in-out
-          m-0
-          focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" id="exampleInputEmail2"
-          aria-describedby="emailHelp" placeholder="Enter email"/>
-      </div>
-      <div className="form-group mb-6">
-        <label htmlFor="exampleInputPassword2" className="form-label inline-block mb-2 text-gray-700">Password</label>
-        <input type="password" className="form-control block
-          w-full
-          px-3
+    
           py-1.5
           text-base
           font-normal
@@ -50,24 +87,65 @@ export default function LoginForm() {
           transition
           ease-in-out
           m-0
-          focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" id="exampleInputPassword2"
-          placeholder="Password"/>
+          focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none required"   placeholder="abc78@gmail.com"
+        />
+        {formErrors.name && <div>{formErrors.name}</div>}
       </div>
-      <div className="flex justify-between items-center mb-6">
-        <div className="form-group form-check">
-          <input type="checkbox"
-            className="form-check-input appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
-            id="exampleCheck2"/>
-          <label className="form-check-label inline-block text-gray-800" htmlFor="exampleCheck2">Remember me</label>
-        </div>
-        <a href="#!"
-          className="text-blue-600 hover:text-blue-700 focus:text-blue-700 transition duration-200 ease-in-out">Forgot
-          password?</a>
+      <div className="form-group mb-1 pl-10">
+        <label htmlFor="email">Email:</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          value={formData.email}
+          onChange={handleChange} className="form-control block
+          w-10/12
+          px-3
+    
+          py-1.5
+          text-base
+          font-normal
+          text-gray-700
+          bg-white bg-clip-padding
+          border border-solid border-gray-300
+          rounded
+          transition
+          ease-in-out
+          m-0
+          focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none required" 
+        />
+        {formErrors.email && <div>{formErrors.email}</div>}
       </div>
-      <button type="submit" className="
-        w-full
+      <div className="form-group mb-1 pl-10">
+        <label htmlFor="password">Password:</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          value={formData.password}
+          onChange={handleChange}  className="form-control block
+          w-10/12
+             px-3
+             py-1.5
+             text-base
+             font-normal
+             text-gray-700
+             bg-white bg-clip-padding
+             border border-solid border-gray-300
+             rounded
+             transition
+             ease-in-out
+             m-0
+             focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" 
+        />
+        {formErrors.password && <div>{formErrors.password}</div>}
+      </div>
+      <button type="submit" disabled={submitting} className="
+            w-10/12
         px-6
-        py-2.5
+        py-2.5 pl-10
+        mt-5
+        ml-10
         bg-blue-600
         text-white
         font-medium
@@ -81,41 +159,47 @@ export default function LoginForm() {
         active:bg-blue-800 active:shadow-lg
         transition
         duration-150
-        ease-in-out">Sign in</button>
-
-        <div>
-<div className='flex pt-2'>
-<div className='mr-5 ml-5'>
-<Button className=''
+        ease-in-out">
+        Submit
+      </button>
+      <div className='flex  ml-12 pl-20 pt-4'>
+<div className=' mr-3 justify-center '>
+<Button className='mr-3 pl-3'
         variant="contained"
       
-        startIcon={<FacebookIcon />}
-      >
+        startIcon={<FacebookIcon />}  >
       Facebook
       </Button>
   </div>
+
 <div> 
 <Button
         variant="contained"
       
-        startIcon={<GoogleIcon/>}
+        startIcon={<GoogleIcon/>} className='ml-3'
       >
         Google
       </Button>
 
 </div>
 </div>
-
-        </div>
-        <Link href="#" underline="none">
+<Link href="#" underline="none">
      
-    </Link>
-      <p className="text-gray-800 mt-6 text-center">Not a member? <a href="#!"
-          className="text-blue-600 hover:text-blue-700 focus:text-blue-700 transition duration-200 ease-in-out">Register</a>
-      </p>
+     </Link>
+       <p className="text-gray-800 mt-6  text-center">Not a member? <a href="#!"
+           className="text-blue-600 hover:text-blue-700 focus:text-blue-700 transition duration-200 ease-in-out">Register</a>
+       </p>
+
       
     </form>
-  </div>
 
+
+
+
+      </div>
+      </div>
+  
   );
-}
+};
+
+export default LoginForm;
